@@ -1,0 +1,31 @@
+version: "3.3"
+services:
+  server:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DB_NAME=testmaujuteknologiinovasi
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=@Landung25061995
+      - DB_PORT=5432
+      - DB_HOST=psql
+    depends_on:
+      - db
+    command: npm start
+  db:
+    container_name: "psql"
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=testmaujuteknologiinovasi
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@Landung25061995
+volumes:
+  pg_data:
